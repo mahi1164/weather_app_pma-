@@ -1,4 +1,5 @@
 # 🌤️ Weather App — AI/ML Internship Assessment | PM Accelerator
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 A pastel-themed, interactive weather app that fetches live weather, YouTube videos, and Google Maps for any location — with full database integration and data export.
 
