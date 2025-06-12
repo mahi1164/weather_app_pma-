@@ -7,6 +7,7 @@ import csv
 from flask import Response, jsonify
 
 app = Flask(__name__)
+app.debug = True
 
 API_KEY = 'b21655887f6688f43fc01ddc353294de' 
 YOUTUBE_API_KEY = 'AIzaSyBxNYCNHVTHgucW0lRGPL1DvG2_4co3IWM'
