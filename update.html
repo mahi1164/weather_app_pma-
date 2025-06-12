@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Weather Record</title>
+</head>
+<body>
+    <h2>Update Weather Record</h2>
+    <form method="POST">
+        <label>Location:</label><br>
+        <input type="text" name="location" value="{{ record[1] }}"><br><br>
+
+        <label>Date & Time:</label><br>
+        <input type="text" name="datetime" value="{{ record[2] }}"><br><br>
+
+        <label>Temperature:</label><br>
+        <input type="text" name="temperature" value="{{ record[3] }}"><br><br>
+
+        <label>Description:</label><br>
+        <input type="text" name="description" value="{{ record[4] }}"><br><br>
+
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>

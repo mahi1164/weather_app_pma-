@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App 🌦️</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #f6d365, #fda085);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 30px;
+            background: white;
+            margin-top: 60px;
+            border-radius: 20px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+        }
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #ff5e62;
+        }
+        input, button {
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+        button {
+            background-color: #ff758c;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ff5e62;
+        }
+        .nav {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #444;
+            font-weight: bold;
+        }
+        .nav a:hover {
+            color: #ff5e62;
+        }
+        .dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropbtn {
+    background-color: #ff758c;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff0f3;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #ff5e62;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ffe5ec;
+    border-radius: 10px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="/">🏡 Home</a>
+            <a href="/history">📜 History</a>
+        
+            <div class="dropdown">
+                <button class="dropbtn">📦 Export ▼</button>
+                <div class="dropdown-content">
+                    <a href="/export/csv">📤 Export CSV</a>
+                    <a href="/export/json">🔁 Export JSON</a>
+                </div>
+            </div>
+        </div>
+        
+        <h1>Weather App 🌤️</h1>
+        <form method="POST">
+            <input type="text" name="location" placeholder="Enter city or ZIP code" required>
+            <button type="submit">Get Weather</button>
+        </form>
+
+        {% if weather %}
+            {% if weather.error %}
+                <p>{{ weather.error }}</p>
+            {% else %}
+                <h3>5-Day Forecast for {{ weather.city.name }}</h3>
+                <ul>
+                    {% for item in weather.list[:5] %}
+                        <li>{{ item.dt_txt }} - {{ item.main.temp }}°C, {{ item.weather[0].description }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endif %}
+        {% if video_links %}
+            <h3>Watch about {{ weather.city.name }} 🌍</h3>
+        <div>
+            {% for link in video_links %}
+                <iframe width="300" height="180" src="{{ link }}" frameborder="0" allowfullscreen></iframe>
+        {% endfor %}
+        {% if map_url %}
+        <h3>Explore {{ weather.city.name }} on the Map 🗺️</h3>
+        <iframe
+            width="100%"
+            height="300"
+            frameborder="0"
+            style="border:0; border-radius: 15px; box-shadow: 0 0 10px rgba(0,0,0,0.2);"
+            src="{{ map_url }}"
+            allowfullscreen>
+        </iframe>
+        {% endif %}
+        </div>
+        {% endif %}
+        
+
+    </div>
+</body>
+</html>

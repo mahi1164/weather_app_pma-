@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather History 📜</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #f6d365, #fda085);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            background: white;
+            margin-top: 60px;
+            border-radius: 20px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+        }
+        h2 {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #ff5e62;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #eee;
+            text-align: center;
+        }
+        th {
+            background-color: #ffe0e6;
+            color: #ff5e62;
+        }
+        tr:hover {
+            background-color: #fff3f5;
+        }
+        .nav {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #444;
+            font-weight: bold;
+        }
+        .nav a:hover {
+            color: #ff5e62;
+        }
+        .action-links a {
+            color: #ff5e62;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .action-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="/">🏡 Home</a>
+            <a href="/export/csv">📤 Export CSV</a>
+            <a href="/export/json">🔁 Export JSON</a>
+            <a href="/history">📜 History</a>
+            <a href="/export">📦 Export</a>
+        </div>
+
+        <h2>Saved Weather History 📊</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Location</th>
+                <th>Date & Time</th>
+                <th>Temp (°C)</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+            {% for row in records %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td class="action-links">
+                    <a href="/update/{{ row[0] }}">✏️ Update</a> |
+                    <a href="/delete/{{ row[0] }}">🗑️ Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
